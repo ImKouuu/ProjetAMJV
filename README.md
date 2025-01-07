@@ -1,20 +1,20 @@
-SkibidHumain
+Humain
 	Silhouette "classique"
 	Epée
 	Vitesse normale
 
-SkibidiNain
+Nain
 	Petit
 	Hache
 	Résistant
 
-SkibidElfe
+Elfe
 	Grand oreilles
 	Arc
 	Rapide
 
 
-SkibiTroll
+Troll
 	Immense
 	Masse
 	Très lent
@@ -22,7 +22,7 @@ SkibiTroll
 	Très résistant
 	cheeer
 
-SkibiDragonneau
+Dragonneau
 	Vol
 	Beaucoup de dégâts
 	Faible
