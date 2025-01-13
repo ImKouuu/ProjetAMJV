@@ -30,7 +30,7 @@ public class ShopManager : MonoBehaviour
             if (MoneyManager.Instance.GetMoney() >= 10) // Vérifiez si le joueur a assez d'argent
             {
                 MoneyManager.Instance.SpendMoney(10);
-                Vector3 worldPosition = benchTilemap.CellToWorld(freeTilePosition.Value) + benchTilemap.tileAnchor;
+                Vector3 worldPosition = benchTilemap.GetCellCenterWorld(freeTilePosition.Value);
                 Instantiate(mobPrefab, worldPosition, Quaternion.identity);
             }
             else
