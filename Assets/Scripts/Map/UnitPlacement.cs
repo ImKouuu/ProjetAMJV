@@ -4,7 +4,6 @@ using UnityEngine.Tilemaps;
 [RequireComponent(typeof(Tilemap))]
 public class UnitPlacement : MonoBehaviour
 {
-    [SerializeField] private Tile hexHighlightTile;
     [SerializeField] private Camera _camera;
     private Tilemap hexTilemap;
     [SerializeField] private Tilemap benchTilemap;
