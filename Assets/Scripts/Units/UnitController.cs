@@ -13,6 +13,8 @@ public class UnitController : MonoBehaviour
     [SerializeField] private int attackRange;
     [SerializeField] private int cost;
     [SerializeField] private int specialAttackDamage;
+    [SerializeField] private int armor;
+    [SerializeField] private int manaRegen;
 
     void Update()
     {
@@ -32,6 +34,8 @@ public class UnitController : MonoBehaviour
     public int GetAttackRange() => attackRange;
     public int GetCost() => cost;
     public int GetSpecialAttackDamage() => specialAttackDamage;
+    public int GetArmor() => armor;
+    public int GetManaRegen() => manaRegen;
 
 
     // Setters
@@ -45,12 +49,19 @@ public class UnitController : MonoBehaviour
     public void SetAttackRange(int value) => attackRange = value;
     public void SetCost(int value) => cost = value;
     public void SetSpecialAttackDamage(int value) => specialAttackDamage = value;
+    public void SetArmor(int value) => armor = value;
+    public void SetManaRegen(int value) => manaRegen = value;
 
 
     // Example functions
+    public void RegenerateMana()
+    {
+        mana +=manaRegen;
+        if (mana > maxMana) mana = maxMana;
+    }
     public void TakeDamage(int damage)
     {
-        health -= damage;
+        health -= (armor-damage);
         if (health < 0) health = 0;
     }
 
