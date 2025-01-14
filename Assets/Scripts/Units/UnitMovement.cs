@@ -10,11 +10,14 @@ public class UnitMovement : MonoBehaviour
     [SerializeField] private Transform target;
 
     [SerializeField] private NavMeshAgent navMeshAgent;
+    [SerializeField] private UnitStats unitStats;
     private bool isAttacking = false;
+    private UnitController unitController;
 
     void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
+        unitController = transform.GetComponent<UnitController>();
     }
 
     void Update()
@@ -47,7 +50,7 @@ public class UnitMovement : MonoBehaviour
     private void MoveDefensive()
     {
         float distance = Vector3.Distance(transform.position, target.position);
-        if (distance > transform.GetComponent<UnitController>().GetAttackRange())
+        if (distance > unitStats.attackRange)
         {
             navMeshAgent.SetDestination(target.position);
         }
@@ -81,24 +84,26 @@ public class UnitMovement : MonoBehaviour
         isAttacking = true;
         while (true)
         {
-            Collider[] hitColliders = Physics.OverlapSphere(transform.position, transform.GetComponent<UnitController>().GetAttackRange());
+            Collider[] hitColliders = Physics.OverlapSphere(transform.position, unitStats.attackRange);
             foreach (var hitCollider in hitColliders)
             {
                 if (hitCollider.CompareTag("Enemy"))
                 {
-                    if (transform.GetComponent<UnitController>().GetMana() == transform.GetComponent<UnitController>().GetMaxMana())
+                    if (unitController.GetMana() == unitStats.maxMana)
                     {
-                        hitCollider.GetComponent<UnitController>().TakeDamage(transform.GetComponent<UnitController>().GetSpecialAttackDamage());
-                        transform.GetComponent<UnitController>().SetMana(0);
+                        transform.GetComponent<Attack>().Launch(hitCollider.transform, GetComponent<Animator>(), true);
+                        hitCollider.GetComponent<UnitController>().TakeDamage(unitStats.specialAttackDamage);
+                        unitController.SetMana(0);
                     }
                     else
                     {
-                        hitCollider.GetComponent<UnitController>().TakeDamage(transform.GetComponent<UnitController>().GetAttackDamage());
-                        transform.GetComponent<UnitController>().RegenerateMana();
+                        transform.GetComponent<Attack>().Launch(hitCollider.transform, GetComponent<Animator>(), false);
+                        hitCollider.GetComponent<UnitController>().TakeDamage(unitStats.attackDamage);
+                        unitController.RegenerateMana();
                     }
                 }
             }
-            yield return new WaitForSeconds(transform.GetComponent<UnitController>().GetAttackSpeed());
+            yield return new WaitForSeconds(unitStats.attackSpeed);
         }
     }
 
