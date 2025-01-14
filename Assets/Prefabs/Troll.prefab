@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1307438265268721015}
   - component: {fileID: 3333458103566704221}
   - component: {fileID: 7858100696106391497}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bras2bot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,7 +104,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5000001
   m_Height: 2
@@ -122,7 +122,7 @@ GameObject:
   - component: {fileID: 8376788497653851410}
   - component: {fileID: 7538249875448852114}
   - component: {fileID: 8093607102801292074}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: eye1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -214,7 +214,7 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
@@ -230,7 +230,7 @@ GameObject:
   - component: {fileID: 2078078435638021602}
   - component: {fileID: 976340051021905286}
   - component: {fileID: 3122042070412936621}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -322,7 +322,7 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
@@ -338,7 +338,7 @@ GameObject:
   - component: {fileID: 8873904168304708063}
   - component: {fileID: 5386666643516682464}
   - component: {fileID: 768321768828741608}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BodyTop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -430,7 +430,7 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
@@ -446,7 +446,7 @@ GameObject:
   - component: {fileID: 6098287892939405800}
   - component: {fileID: 7427544729499443140}
   - component: {fileID: 8942387887120478389}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bras2top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -538,7 +538,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5000001
   m_Height: 2
@@ -556,7 +556,7 @@ GameObject:
   - component: {fileID: 5613469450240213270}
   - component: {fileID: 6829307795850253282}
   - component: {fileID: 2594794327934263766}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -648,7 +648,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5000001
   m_Height: 2
@@ -666,7 +666,7 @@ GameObject:
   - component: {fileID: 4575447793369942500}
   - component: {fileID: 7877971172205746287}
   - component: {fileID: 8332024737311165923}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: eye2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -758,7 +758,7 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
@@ -774,7 +774,7 @@ GameObject:
   - component: {fileID: 265352465094694672}
   - component: {fileID: 6906885007836511228}
   - component: {fileID: 8254359484580183969}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bras1top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -866,7 +866,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5000001
   m_Height: 2
@@ -882,9 +882,11 @@ GameObject:
   m_Component:
   - component: {fileID: 7582709135473608945}
   - component: {fileID: 3263390194896633089}
-  m_Layer: 0
+  - component: {fileID: 2680024475391624694}
+  - component: {fileID: 1610472276130783676}
+  m_Layer: 7
   m_Name: Troll
-  m_TagString: Untagged
+  m_TagString: Unit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -899,7 +901,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3778619154587570460}
@@ -938,6 +940,56 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!54 &2680024475391624694
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7531527203773230815}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!136 &1610472276130783676
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7531527203773230815}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 2.2793424
+  m_Height: 10.871913
+  m_Direction: 1
+  m_Center: {x: 0, y: -0.76439536, z: 0}
 --- !u!1 &8038563301595775595
 GameObject:
   m_ObjectHideFlags: 0
@@ -950,7 +1002,7 @@ GameObject:
   - component: {fileID: 8936780835781152739}
   - component: {fileID: 3986815066064059415}
   - component: {fileID: 2823109605791075883}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bras1bot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1042,7 +1094,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5000001
   m_Height: 2
@@ -1060,7 +1112,7 @@ GameObject:
   - component: {fileID: 4075933677689078923}
   - component: {fileID: 298774211350676327}
   - component: {fileID: 5924281392620900760}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Jambe1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1152,7 +1204,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5000001
   m_Height: 2
@@ -1170,7 +1222,7 @@ GameObject:
   - component: {fileID: 9195387491482711730}
   - component: {fileID: 1513917474581437459}
   - component: {fileID: 1155406843069903091}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BodyBot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1262,7 +1314,7 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
@@ -1278,7 +1330,7 @@ GameObject:
   - component: {fileID: 3537609414682873006}
   - component: {fileID: 102821289825912040}
   - component: {fileID: 7415743264244586042}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Jambe2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1370,7 +1422,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5000001
   m_Height: 2

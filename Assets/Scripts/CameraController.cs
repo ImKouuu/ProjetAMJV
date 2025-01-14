@@ -5,20 +5,33 @@ public class CameraController : MonoBehaviour
     [SerializeField] private float mouseSensitivity = 1000f;
     [SerializeField] private float moveSpeed = 10f;
 
-    [SerializeField] private float xRotation = 0f; // Rotation verticale (pitch)
-    [SerializeField] private float yRotation = 0f; // Rotation horizontale (yaw)
+    private bool isRightClickHeld = false;
 
     void Start()
     {
-        // Verrouiller le curseur
-        Cursor.lockState = CursorLockMode.Locked;
+        // Initialement, le curseur est disponible
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     void Update()
     {
-        bool rightClick = Input.GetMouseButtonDown(1);
         HandleMovement();
-        if (rightClick)
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            isRightClickHeld = true;
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+        else if (Input.GetMouseButtonUp(1))
+        {
+            isRightClickHeld = false;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+
+        if (isRightClickHeld)
         {
             HandleMouseLook();
         }
@@ -44,13 +57,9 @@ public class CameraController : MonoBehaviour
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
         // Rotation verticale (pitch)
-        xRotation -= mouseY;
-        xRotation = Mathf.Clamp(xRotation, -90f, 90f); // Empêche de regarder trop haut/bas
+        transform.Rotate(Vector3.left * mouseY);
 
         // Rotation horizontale (yaw)
-        yRotation += mouseX;
-
-        // Applique les rotations
-        transform.rotation = Quaternion.Euler(xRotation, yRotation, 0f);
+        transform.Rotate(Vector3.up * mouseX, Space.World);
     }
 }
