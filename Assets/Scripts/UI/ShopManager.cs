@@ -11,6 +11,7 @@ public class ShopManager : MonoBehaviour
     [SerializeField] private Tilemap benchTilemap; // Référence à la tilemap du banc
     [SerializeField] private TileBase benchTile; // Référence à la tile du banc
     [SerializeField] private LayerMask unitLayerMask; // LayerMask pour les unités
+    [SerializeField] private float spawnHeightOffset = 1.0f; // Décalage vertical pour le spawn
 
     void Start()
     {
@@ -31,6 +32,7 @@ public class ShopManager : MonoBehaviour
             {
                 MoneyManager.Instance.SpendMoney(10);
                 Vector3 worldPosition = benchTilemap.GetCellCenterWorld(freeTilePosition.Value);
+                worldPosition.y += spawnHeightOffset; // Ajouter le décalage vertical
                 Instantiate(mobPrefab, worldPosition, Quaternion.identity);
             }
             else
