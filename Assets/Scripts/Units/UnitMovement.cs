@@ -89,10 +89,12 @@ public class UnitMovement : MonoBehaviour
                     if (transform.GetComponent<UnitController>().GetMana() == transform.GetComponent<UnitController>().GetMaxMana())
                     {
                         hitCollider.GetComponent<UnitController>().TakeDamage(transform.GetComponent<UnitController>().GetSpecialAttackDamage());
+                        transform.GetComponent<UnitController>().SetMana(0);
                     }
                     else
                     {
                         hitCollider.GetComponent<UnitController>().TakeDamage(transform.GetComponent<UnitController>().GetAttackDamage());
+                        transform.GetComponent<UnitController>().RegenerateMana();
                     }
                 }
             }
