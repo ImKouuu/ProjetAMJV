@@ -44,22 +44,16 @@ public class UnitPlacement : MonoBehaviour
             if (Physics.Raycast(ray, out RaycastHit hit, float.MaxValue, hexLayerMask) || Physics.Raycast(ray, out hit, float.MaxValue, benchLayerMask))
             {
                 Vector3 point = hit.point;
-                if (hexTilemap.GetTile(hexTilemap.WorldToCell(point)) != null)
+                if (hit.collider != null)
                 {
-                    Vector3Int cellPosition = hexTilemap.WorldToCell(point);
-                    Vector3 worldPosition = hexTilemap.GetCellCenterWorld(cellPosition);
-                    draggedUnit.transform.position = new Vector3(worldPosition.x, draggedUnit.transform.position.y, worldPosition.z);
+                    Vector3 colliderCenter = hit.collider.bounds.center;
+                    float unitHeight = draggedUnit.GetComponent<Collider>().bounds.size.y;
+                    draggedUnit.transform.position = new Vector3(colliderCenter.x, colliderCenter.y + hit.collider.bounds.extents.y + unitHeight / 2, colliderCenter.z); // Adjust Y position to be on top of the cube
                 }
-                else if (benchTilemap.GetTile(benchTilemap.WorldToCell(point)) != null)
-                {
-                    Vector3Int cellPosition = benchTilemap.WorldToCell(point);
-                    Vector3 worldPosition = benchTilemap.GetCellCenterWorld(cellPosition);
-                    draggedUnit.transform.position = new Vector3(worldPosition.x, draggedUnit.transform.position.y, worldPosition.z);
-                }
-                else
-                {
-                    draggedUnit.transform.position = initialPosition;
-                }
+            else
+            {
+                draggedUnit.transform.position = initialPosition;
+            }
             }
         }
     }
@@ -69,7 +63,6 @@ public class UnitPlacement : MonoBehaviour
         Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit hit, float.MaxValue, unitLayerMask))
         {
-            Debug.Log("Hit " + hit.collider.name);
             if (hit.collider.CompareTag("Unit"))
             {
                 isDragging = true;
@@ -93,6 +86,31 @@ public class UnitPlacement : MonoBehaviour
     {
         if (draggedUnit != null)
         {
+            Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out RaycastHit hit, float.MaxValue, hexLayerMask) || Physics.Raycast(ray, out hit, float.MaxValue, benchLayerMask))
+            {
+                Vector3 position = hit.collider.bounds.center;
+                Vector3 overlapBoxSize = hit.collider.bounds.size;
+                overlapBoxSize.y *= 2; // Augmenter la taille de la boîte de détection sur l'axe Y
+
+                Collider[] colliders = Physics.OverlapBox(position, overlapBoxSize / 2, Quaternion.identity, unitLayerMask);
+                if (colliders.Length == 0)
+                {
+                    // La position est libre, on peut lâcher l'unité
+                    draggedUnit.transform.position = new Vector3(position.x, position.y + hit.collider.bounds.extents.y + draggedUnit.GetComponent<Collider>().bounds.size.y / 2, position.z);
+                }
+                else
+                {
+                    // La position est occupée, on remet l'unité à sa position initiale
+                    draggedUnit.transform.position = initialPosition;
+                }
+            }
+            else
+            {
+                // Si le raycast ne touche rien, on remet l'unité à sa position initiale
+                draggedUnit.transform.position = initialPosition;
+            }
+
             Rigidbody rb = draggedUnit.GetComponent<Rigidbody>();
             if (rb != null)
             {

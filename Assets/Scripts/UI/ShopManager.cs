@@ -1,70 +1,102 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-using UnityEngine.Tilemaps;
+using System.Collections.Generic;
 
 public class ShopManager : MonoBehaviour
 {
     [SerializeField] private TMP_Text moneyText;
-    [SerializeField] private Button buyHumanButton;
-    [SerializeField] private Button buyElfButton; // Bouton pour acheter des elfes
-    [SerializeField] private GameObject humanPrefab; // Référence au prefab du mob humain
-    [SerializeField] private GameObject elfPrefab; // Référence au prefab du mob elfe
-    [SerializeField] private Tilemap benchTilemap; // Référence à la tilemap du banc
-    [SerializeField] private TileBase benchTile; // Référence à la tile du banc
-    [SerializeField] private LayerMask unitLayerMask; // LayerMask pour les unités
-    [SerializeField] private float spawnHeightOffset = 1.0f; // Décalage vertical pour le spawn
-    [SerializeField] private int humanCost = 10; // Coût pour acheter un humain
-    [SerializeField] private int elfCost = 15; // Coût pour acheter un elfe
+    [SerializeField] private Button buyButtonHuman;
+    [SerializeField] private Button buyButtonElf;
+    [SerializeField] private GameObject humanPrefab;
+    [SerializeField] private GameObject elfPrefab;
+    [SerializeField] private int humanCost = 10;
+    [SerializeField] private int elfCost = 15;
+    [SerializeField] private List<Transform> benchSpots = new List<Transform>();
+    [SerializeField] private Vector3 checkSize = new Vector3(0.8f, 0.1f, 0.8f); // Taille de la zone de vérification
 
     void Start()
     {
-        buyHumanButton.onClick.AddListener(() => BuyUnit(humanPrefab, humanCost));
-        buyElfButton.onClick.AddListener(() => BuyUnit(elfPrefab, elfCost));
-    }
-
-    void Update()
-    {
-        moneyText.text = "Money: " + MoneyManager.Instance.GetMoney();
+        buyButtonHuman.onClick.AddListener(() => BuyUnit(humanPrefab, humanCost));
+        buyButtonElf.onClick.AddListener(() => BuyUnit(elfPrefab, elfCost));
+        
+        Debug.Log($"Spots initialisés : {benchSpots.Count}");
     }
 
     private void BuyUnit(GameObject unitPrefab, int cost)
     {
-        Vector3Int? freeTilePosition = FindFreeTileOnBench();
-        if (freeTilePosition.HasValue)
+        if (MoneyManager.Instance.GetMoney() < cost)
         {
-            if (MoneyManager.Instance.GetMoney() >= cost) // Vérifiez si le joueur a assez d'argent
-            {
-                MoneyManager.Instance.SpendMoney(cost);
-                Vector3 worldPosition = benchTilemap.GetCellCenterWorld(freeTilePosition.Value);
-                worldPosition.y += spawnHeightOffset; // Ajouter le décalage vertical
-                Instantiate(unitPrefab, worldPosition, Quaternion.identity);
-            }
-            else
-            {
-                Debug.LogWarning("Not enough money to buy the unit!");
-            }
+            Debug.Log("Pas assez d'argent !");
+            return;
+        }
+
+        Transform freeSpot = FindFreeBenchSpot();
+        
+        if (freeSpot != null)
+        {
+            MoneyManager.Instance.SpendMoney(cost);
+            PlaceUnit(unitPrefab, freeSpot);
         }
         else
         {
-            Debug.LogWarning("No free tile available on the bench!");
+            Debug.Log("Banc complet !");
         }
     }
 
-    private Vector3Int? FindFreeTileOnBench()
+    private Transform FindFreeBenchSpot()
     {
-        foreach (Vector3Int position in benchTilemap.cellBounds.allPositionsWithin)
+        foreach (Transform spot in benchSpots)
         {
-            if (benchTilemap.GetTile(position) == benchTile)
+            // Vérification précise avec OverlapBox
+            Collider[] colliders = Physics.OverlapBox(
+                spot.position + Vector3.up * 0.05f, // Léger offset vertical
+                checkSize / 2,
+                Quaternion.identity
+            );
+
+            bool occupied = false;
+            foreach (Collider col in colliders)
             {
-                Vector3 worldPosition = benchTilemap.GetCellCenterWorld(position);
-                Collider[] colliders = Physics.OverlapBox(worldPosition, benchTilemap.cellSize / 2, Quaternion.identity, unitLayerMask);
-                if (colliders.Length == 0)
+                if (col.CompareTag("Unit"))
                 {
-                    return position;
+                    occupied = true;
+                    break;
                 }
             }
+
+            // Debug visuel
+            Debug.DrawLine(spot.position - checkSize/2, spot.position + checkSize/2, 
+                         occupied ? Color.red : Color.green, 0.5f);
+
+            if (!occupied) return spot;
         }
         return null;
+    }
+
+    private void PlaceUnit(GameObject prefab, Transform spot)
+    {
+        // Placement précis sur le cube
+        Vector3 spawnPosition = spot.position;
+        if (spot.TryGetComponent<Collider>(out Collider col))
+        {
+            spawnPosition.y += col.bounds.extents.y; // Haut du cube
+        }
+
+        GameObject newUnit = Instantiate(prefab, spawnPosition, Quaternion.identity);
+        
+        // Alignement final
+        if (newUnit.TryGetComponent<Collider>(out Collider unitCol))
+        {
+            newUnit.transform.position += Vector3.up * unitCol.bounds.extents.y;
+        }
+    }
+
+    void Update()
+    {
+        if (MoneyManager.Instance != null)
+        {
+            moneyText.text = $"Money: {MoneyManager.Instance.GetMoney()}";
+        }
     }
 }

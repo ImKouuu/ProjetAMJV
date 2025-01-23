@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections;
 
 public class MoneyManager : MonoBehaviour
 {
@@ -17,21 +16,6 @@ public class MoneyManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
-        }
-    }
-
-    void Start()
-    {
-        StartCoroutine(AddMoneyOverTime());
-    }
-
-    private IEnumerator AddMoneyOverTime()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(3f);
-            money++;
-            Debug.Log("Money: " + money);
         }
     }
 
