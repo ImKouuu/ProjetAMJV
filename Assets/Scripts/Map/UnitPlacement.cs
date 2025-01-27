@@ -5,26 +5,19 @@ using UnityEngine.Tilemaps;
 public class UnitPlacement : MonoBehaviour
 {
     [SerializeField] private Camera _camera;
-    private Tilemap hexTilemap;
     [SerializeField] private Tilemap benchTilemap;
     [SerializeField] private LayerMask hexLayerMask;
-    [SerializeField] private LayerMask benchLayerMask;
     [SerializeField] private LayerMask unitLayerMask;
-    private TileBase previousTile; // La tuile précédente sous la souris
-    private Vector3Int currentPosition; // Position actuelle sous la souris
-    private Vector3Int previousPosition; // Position précédente sous la souris
     private bool isDragging = false;
     private GameObject draggedUnit;
     private Vector3 initialPosition;
 
     void Start()
     {
-        hexTilemap = GetComponent<Tilemap>();
         if (_camera == null)
         {
             _camera = Camera.main;
         }
-        previousPosition = new Vector3Int(-1, -1, -1);
     }
 
     void Update()
@@ -41,7 +34,7 @@ public class UnitPlacement : MonoBehaviour
         {
             initialPosition = draggedUnit.transform.position;
             Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out RaycastHit hit, float.MaxValue, hexLayerMask) || Physics.Raycast(ray, out hit, float.MaxValue, benchLayerMask))
+            if (Physics.Raycast(ray, out RaycastHit hit, float.MaxValue, hexLayerMask))
             {
                 Vector3 point = hit.point;
                 if (hit.collider != null)
@@ -87,7 +80,7 @@ public class UnitPlacement : MonoBehaviour
         if (draggedUnit != null)
         {
             Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out RaycastHit hit, float.MaxValue, hexLayerMask) || Physics.Raycast(ray, out hit, float.MaxValue, benchLayerMask))
+            if (Physics.Raycast(ray, out RaycastHit hit, float.MaxValue, hexLayerMask))
             {
                 Vector3 position = hit.collider.bounds.center;
                 Vector3 overlapBoxSize = hit.collider.bounds.size;
@@ -124,12 +117,5 @@ public class UnitPlacement : MonoBehaviour
             draggedUnit = null;
         }
         isDragging = false;
-    }
-
-    private Vector3 GetMouseWorldPosition()
-    {
-        Vector3 mouseScreenPosition = Input.mousePosition;
-        mouseScreenPosition.z = _camera.nearClipPlane;
-        return _camera.ScreenToWorldPoint(mouseScreenPosition);
     }
 }

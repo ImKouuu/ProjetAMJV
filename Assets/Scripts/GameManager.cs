@@ -1,11 +1,15 @@
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Tilemaps;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
     public bool IsBattleActive { get; private set; } = false;
+
+    [SerializeField] private GameObject blueGrass, blueSand, grass, sand;
+    [SerializeField] private Tilemap arenaTilemap;
 
     void Awake()
     {
@@ -21,6 +25,7 @@ public class GameManager : MonoBehaviour
     public void StartBattle()
     {
         IsBattleActive = true;
+        ReplaceBenchTilesWithGrass();
         EnableAllUnitsMovement();
         FindFirstObjectByType<ShopManager>()?.DisableShop(); // Désactive la boutique
     }
@@ -29,13 +34,28 @@ public class GameManager : MonoBehaviour
     {
         foreach (UnitMovement unit in FindObjectsByType<UnitMovement>(FindObjectsSortMode.None))
         {
-            DisableNavMeshAgent(unit);
-            unit.enabled = false; // Désactiver le script de mouvement
-            Attack attackScript = unit.GetComponent<Attack>();
-            if (attackScript != null)
-            {
-                attackScript.enabled = false; // Désactiver le script d'attaque
-            }
+            DisableUnit(unit.gameObject);
+        }
+    }
+
+    public void DisableUnit(GameObject unit)
+    {
+        NavMeshAgent agent = unit.GetComponent<NavMeshAgent>();
+        if (agent != null)
+        {
+            agent.enabled = false;
+        }
+
+        UnitMovement unitMovement = unit.GetComponent<UnitMovement>();
+        if (unitMovement != null)
+        {
+            unitMovement.enabled = false;
+        }
+
+        Attack attackScript = unit.GetComponent<Attack>();
+        if (attackScript != null)
+        {
+            attackScript.enabled = false;
         }
     }
 
@@ -43,31 +63,47 @@ public class GameManager : MonoBehaviour
     {
         foreach (UnitMovement unit in FindObjectsByType<UnitMovement>(FindObjectsSortMode.None))
         {
-            EnableNavMeshAgent(unit);
-            unit.enabled = true; // Activer le script de mouvement
-            Attack attackScript = unit.GetComponent<Attack>();
-            if (attackScript != null)
-            {
-                attackScript.enabled = true; // Activer le script d'attaque
-            }
+            EnableUnit(unit.gameObject);
         }
     }
 
-    private void DisableNavMeshAgent(UnitMovement unit)
-    {
-        NavMeshAgent agent = unit.GetComponent<NavMeshAgent>();
-        if (agent != null)
-        {
-            agent.enabled = false;
-        }
-    }
-
-    private void EnableNavMeshAgent(UnitMovement unit)
+    public void EnableUnit(GameObject unit)
     {
         NavMeshAgent agent = unit.GetComponent<NavMeshAgent>();
         if (agent != null)
         {
             agent.enabled = true;
+        }
+
+        UnitMovement unitMovement = unit.GetComponent<UnitMovement>();
+        if (unitMovement != null)
+        {
+            unitMovement.enabled = true;
+        }
+
+        Attack attackScript = unit.GetComponent<Attack>();
+        if (attackScript != null)
+        {
+            attackScript.enabled = true;
+        }
+    }
+
+    private void ReplaceBenchTilesWithGrass()
+    {
+        foreach (Transform child in arenaTilemap.transform)
+        {
+            if (child.gameObject.name == blueGrass.name)
+            {
+                Vector3 position = child.position;
+                Destroy(child.gameObject);
+                Instantiate(grass, position, Quaternion.identity, arenaTilemap.transform);
+            }
+            else if (child.gameObject.name == blueSand.name)
+            {
+                Vector3 position = child.position;
+                Destroy(child.gameObject);
+                Instantiate(sand, position, Quaternion.identity, arenaTilemap.transform);
+            }
         }
     }
 }
