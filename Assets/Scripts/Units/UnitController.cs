@@ -4,7 +4,7 @@ using UnityEngine;
 public class UnitController : MonoBehaviour
 {
     [SerializeField] private UnitStats unitStats;
-    private int health;
+    [SerializeField] private int health;
     private int mana;
 
     void Start()
@@ -48,7 +48,7 @@ public class UnitController : MonoBehaviour
     }
     public void TakeDamage(int damage)
     {
-        health -= (unitStats.armor-damage);
+        health += (unitStats.armor-damage);
         if (health < 0) health = 0;
     }
 

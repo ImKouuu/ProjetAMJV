@@ -9,10 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93f3996f378508c42a6b63c384a8ba6e, type: 3}
+  m_Script: {fileID: 11500000, guid: 7a1bed08bb8870646b3adb734194835c, type: 3}
   m_Name: DragonStats
   m_EditorClassIdentifier: 
-  unitName: Dragon
-  health: 500
-  damage: 50
-  speed: 20
+  attackDamage: 0
+  attackSpeed: 0
+  speed: 0
+  maxMana: 0
+  maxHealth: 0
+  attackRange: 0
+  cost: 0
+  specialAttackDamage: 0
+  armor: 0
+  manaRegen: 0
