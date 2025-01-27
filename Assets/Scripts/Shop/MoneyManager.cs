@@ -5,6 +5,7 @@ public class MoneyManager : MonoBehaviour
     public static MoneyManager Instance { get; private set; }
 
     [SerializeField] private int money = 0;
+    private bool unlimitedMoney = false;
 
     void Awake()
     {
@@ -39,5 +40,16 @@ public class MoneyManager : MonoBehaviour
         {
             Debug.LogWarning("Not enough money!");
         }
+    }
+
+    public bool IsMoneyUnlimited()
+    {
+        return unlimitedMoney;
+    }
+
+    public void UnlimitedMoney()
+    {
+        money = int.MaxValue;
+        unlimitedMoney = true;
     }
 }
