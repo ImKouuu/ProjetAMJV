@@ -808,7 +808,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitStats: {fileID: 11400000, guid: 2107563ab8755094ea8a95d8a537d5c0, type: 2}
   healthManaCanvasPrefab: {fileID: 2369611849813027291, guid: 8f16e9ac5ab119a489b2ce18d0f4fe61, type: 3}
-  barHeightOffset: 4
+  barHeightOffset: 2
 --- !u!114 &7750404483832068012
 MonoBehaviour:
   m_ObjectHideFlags: 0
