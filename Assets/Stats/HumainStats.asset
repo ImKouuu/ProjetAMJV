@@ -16,7 +16,7 @@ MonoBehaviour:
   attackSpeed: 1
   speed: 10
   maxMana: 90
-  maxHealth: 100
+  maxHealth: 200
   attackRange: 5
   cost: 1
   specialAttackDamage: 20

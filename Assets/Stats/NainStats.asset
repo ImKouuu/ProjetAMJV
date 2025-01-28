@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a1bed08bb8870646b3adb734194835c, type: 3}
   m_Name: NainStats
   m_EditorClassIdentifier: 
-  attackDamage: 0
-  attackSpeed: 0
-  speed: 0
-  maxMana: 0
-  maxHealth: 0
-  attackRange: 0
-  cost: 0
-  specialAttackDamage: 0
-  armor: 0
-  manaRegen: 0
+  attackDamage: 10
+  attackSpeed: 1
+  speed: 10
+  maxMana: 90
+  maxHealth: 200
+  attackRange: 5
+  cost: 1
+  specialAttackDamage: 20
+  armor: 5
+  manaRegen: 30

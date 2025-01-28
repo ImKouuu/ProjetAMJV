@@ -668,6 +668,11 @@ GameObject:
   - component: {fileID: 4440732915068545424}
   - component: {fileID: 3742427488056172885}
   - component: {fileID: 5994219855233646708}
+  - component: {fileID: 5703269329561140536}
+  - component: {fileID: 6022008986013437530}
+  - component: {fileID: 3115433277279998461}
+  - component: {fileID: 2896482187608345270}
+  - component: {fileID: 1653870574614391455}
   m_Layer: 7
   m_Name: Elfe
   m_TagString: Unit
@@ -777,6 +782,90 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &5703269329561140536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1802390789506737934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1693505a825f3af42b56f78ece7f0835, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentMode: 2
+  target: {fileID: 0}
+  navMeshAgent: {fileID: 1653870574614391455}
+  unitStats: {fileID: 11400000, guid: e79e7f5082cb6ad4f8124a00ec286e6f, type: 2}
+  animator: {fileID: 4440732915068545424}
+--- !u!114 &6022008986013437530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1802390789506737934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f12172c67fdd6c47973ace45fa5b451, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unitStats: {fileID: 11400000, guid: e79e7f5082cb6ad4f8124a00ec286e6f, type: 2}
+--- !u!114 &3115433277279998461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1802390789506737934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb4cd0ed49f43374ab29cc211e0ec04c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unitStats: {fileID: 11400000, guid: e79e7f5082cb6ad4f8124a00ec286e6f, type: 2}
+  animator: {fileID: 4440732915068545424}
+  healAmount: 0
+  healRange: 0
+--- !u!114 &2896482187608345270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1802390789506737934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1dd625eaaf19ce4b8702c97ed2abb68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unitStats: {fileID: 11400000, guid: e79e7f5082cb6ad4f8124a00ec286e6f, type: 2}
+  animator: {fileID: 4440732915068545424}
+  arrowPrefab: {fileID: 8995756590131258555, guid: 071c6ab9bd720ed47916912fc129acb2, type: 3}
+  speed: 15
+--- !u!195 &1653870574614391455
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1802390789506737934}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 4
+  m_BaseOffset: 2.2
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &2302059533429690066
 GameObject:
   m_ObjectHideFlags: 0
