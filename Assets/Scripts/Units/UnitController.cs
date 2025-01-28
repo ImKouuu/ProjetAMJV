@@ -1,18 +1,31 @@
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UnitController : MonoBehaviour
 {
     [SerializeField] private UnitStats unitStats;
-    [SerializeField] private int health;
+    [SerializeField] private GameObject healthManaCanvasPrefab;
+    [SerializeField] private float barHeightOffset = 2f;
+    private int health;
     private int mana;
+    private bool barsVisible = false;
+    private Canvas healthManaCanvas;
+    private Image healthBar;
+    private Image manaBar;
 
-    void Start()
+    private void Start()
     {
         health = unitStats.maxHealth;
-        mana = unitStats.maxMana;
+        mana = 0;
+
+        CreateBars();
+
+        UpdateHealthBar();
+        UpdateManaBar();
+        SetBarsVisible(false);
     }
-    void Update()
+
+    private void Update()
     {
         if (health <= 0)
         {
@@ -20,58 +33,64 @@ public class UnitController : MonoBehaviour
         }
     }
 
-    public int GetHealth()
-    {
-        return health;
-    }
-
-    public int GetMana()
-    {
-        return mana;
-    }
+    public int GetHealth() => health;
+    public int GetMana() => mana;
 
     public void SetHealth(int value)
     {
-        health = value;
+        health = Mathf.Clamp(value, 0, unitStats.maxHealth);
+        UpdateHealthBar();
+        ShowBars();
     }
-
     public void SetMana(int value)
     {
-        mana = value;
+        mana = Mathf.Clamp(value, 0, unitStats.maxMana);
+        UpdateManaBar();
+        ShowBars();
+    }
+    public void RegenerateMana() => SetMana(mana + unitStats.manaRegen);
+    public void TakeDamage(int damage) => SetHealth(health + (unitStats.armor - damage));
+    public void Heal(int amount) => SetHealth(health + amount);
+    public void UseMana(int amount) => SetMana(mana - amount);
+
+    private void Death() => Destroy(gameObject);
+
+    private void CreateBars()
+    {
+        GameObject canvasObject = Instantiate(healthManaCanvasPrefab, transform);
+        healthManaCanvas = canvasObject.GetComponent<Canvas>();
+
+        healthManaCanvas.transform.localPosition = new Vector3(0, barHeightOffset, 0);
+
+        healthBar = healthManaCanvas.transform.Find("HealthBar").GetComponent<Image>();
+        manaBar = healthManaCanvas.transform.Find("ManaBar").GetComponent<Image>();
     }
 
-    // Example functions
-    public void RegenerateMana()
+    private void UpdateHealthBar()
     {
-        mana +=unitStats.manaRegen;
-        if (mana > unitStats.maxMana) mana = unitStats.maxMana;
-    }
-    public void TakeDamage(int damage)
-    {
-        health += (unitStats.armor-damage);
-        if (health < 0) health = 0;
+        float healthRatio = (float)health / unitStats.maxHealth;
+        healthBar.fillAmount = healthRatio; 
+        healthBar.color = Color.Lerp(Color.red, Color.white, 1 - healthRatio); 
     }
 
-    public void Heal(int amount)
+    private void UpdateManaBar()
     {
-        health += amount;
-        if (health > unitStats.maxHealth) health = unitStats.maxHealth;
+        float manaRatio = (float)mana / unitStats.maxMana;
+        manaBar.fillAmount = manaRatio; 
+        manaBar.color = Color.Lerp(Color.white, Color.blue, manaRatio);
     }
 
-    public void UseMana(int amount)
+    private void ShowBars()
     {
-        mana -= amount;
-        if (mana < 0) mana = 0;
+        if (!barsVisible)
+        {
+            SetBarsVisible(true);
+        }
     }
 
-    public void RegenerateMana(int amount)
+    private void SetBarsVisible(bool visible)
     {
-        mana += amount;
-        if (mana > unitStats.maxMana) mana = unitStats.maxMana;
-    }
-
-    public void Death()
-    {
-        Destroy(gameObject);
+        healthManaCanvas.gameObject.SetActive(visible);
+        barsVisible = visible;
     }
 }

@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
         IsBattleActive = true;
         ReplaceBenchTilesWithGrass();
         EnableAllUnitsMovement();
-        FindFirstObjectByType<ShopManager>()?.DisableShop(); // Désactive la boutique
+        FindFirstObjectByType<ShopManager>()?.DisableShop();
     }
 
     private void DisableAllUnits()

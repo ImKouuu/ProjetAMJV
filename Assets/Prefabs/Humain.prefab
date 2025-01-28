@@ -882,9 +882,10 @@ GameObject:
   m_Component:
   - component: {fileID: 6458975398266332053}
   - component: {fileID: 1494621142162515988}
-  - component: {fileID: 914268800169078292}
+  - component: {fileID: 9112423509651592359}
+  - component: {fileID: 2693229892971838578}
   - component: {fileID: 4609424757695589119}
-  - component: {fileID: 4411093253174892836}
+  - component: {fileID: 3246679517539543675}
   - component: {fileID: 4268624546586939396}
   - component: {fileID: 3863569867520463345}
   - component: {fileID: 5790830604518484746}
@@ -945,7 +946,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &914268800169078292
+--- !u!114 &9112423509651592359
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -954,13 +955,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 5913587467163417545}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 887ac8ddde3ed834e88ba8b5285aba06, type: 3}
+  m_Script: {fileID: 11500000, guid: a973174717ada6448837556d397de331, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isSpell: 0
-  attack: {fileID: 7400000, guid: 5c68d03bd5b710a4b92585e838b5743f, type: 2}
-  spell: {fileID: 7400000, guid: f9d4a5d5903a901428b7721c02ebb415, type: 2}
-  cooldown: 1
+  unitStats: {fileID: 11400000, guid: fd1728eaeb3d687418c107a6069fc42d, type: 2}
+  animator: {fileID: 1494621142162515988}
+  unitController: {fileID: 0}
+--- !u!114 &2693229892971838578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5913587467163417545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95f20641c4b55ff4b84bd578796ec2ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unitStats: {fileID: 11400000, guid: fd1728eaeb3d687418c107a6069fc42d, type: 2}
+  animator: {fileID: 1494621142162515988}
+  specialAttackDamage: 20
+  radius: 5
+  force: 700
 --- !u!114 &4609424757695589119
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -974,8 +991,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitStats: {fileID: 11400000, guid: fd1728eaeb3d687418c107a6069fc42d, type: 2}
-  health: 0
---- !u!114 &4411093253174892836
+  healthManaCanvasPrefab: {fileID: 2369611849813027291, guid: 8f16e9ac5ab119a489b2ce18d0f4fe61, type: 3}
+  barHeightOffset: 4
+--- !u!114 &3246679517539543675
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -984,7 +1002,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5913587467163417545}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68105d5bfdb88d347ac1ac691952fb3c, type: 3}
+  m_Script: {fileID: 11500000, guid: 1693505a825f3af42b56f78ece7f0835, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   currentMode: 2

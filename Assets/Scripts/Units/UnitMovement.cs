@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
 using System.Collections;
-using UnityEditor.Callbacks;
 
 public class UnitMovement : MonoBehaviour
 {
@@ -9,32 +8,47 @@ public class UnitMovement : MonoBehaviour
 
     [SerializeField] private MovementMode currentMode = MovementMode.Neutral;
     [SerializeField] private Transform target;
-
     [SerializeField] private NavMeshAgent navMeshAgent;
     [SerializeField] private UnitStats unitStats;
-    private bool isAttacking = false;
-    private UnitController unitController;
     [SerializeField] private Animator animator;
+
+    private UnitController unitController;
     private float currentSpeed;
     private float smoothing = 10f;
-    private new string tag;
+    private string enemyTag;
+    private bool isAttacking = false;
 
-    void Start()
+    private void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
-        unitController = transform.GetComponent<UnitController>();
+        unitController = GetComponent<UnitController>();
         animator = GetComponent<Animator>();
-        if (transform.CompareTag("Unit"))
-        {
-            tag = "Enemy";
-        }
-        else
-        {
-            tag = "Unit";
-        }
+
+        enemyTag = CompareTag("Unit") ? "Enemy" : "Unit";
     }
 
-    void Update()
+    private void Update()
+    {
+        HandleMovement();
+        UpdateAnimatorSpeed();
+    }
+
+    public MovementMode GetCurrentMode()
+    {
+        return currentMode;
+    }
+
+    public void SetMovementMode(MovementMode mode)
+    {
+        currentMode = mode;
+    }
+
+    public void SetTarget(Transform newTarget)
+    {
+        target = newTarget;
+    }
+
+    private void HandleMovement()
     {
         switch (currentMode)
         {
@@ -48,33 +62,31 @@ public class UnitMovement : MonoBehaviour
                 MoveNeutral();
                 break;
         }
-        float targetSpeed = GetComponent<Rigidbody>() != null ? GetComponent<Rigidbody>().linearVelocity.magnitude : 0f;
-        currentSpeed = Mathf.Lerp(currentSpeed, targetSpeed, Time.deltaTime * smoothing);
-        animator.SetFloat("Speed", currentSpeed);
-    }
-
-    public void SetMovementMode(MovementMode mode)
-    {
-        currentMode = mode;
     }
 
     private void MoveOffensive()
     {
-        navMeshAgent.SetDestination(target.position);
-        AttackEnemiesInRange();
+        if (target != null)
+        {
+            navMeshAgent.SetDestination(target.position);
+            AttackEnemiesInRange();
+        }
     }
 
     private void MoveDefensive()
     {
-        float distance = Vector3.Distance(transform.position, target.position);
-        if (distance > unitStats.attackRange)
+        if (target != null)
         {
-            navMeshAgent.SetDestination(target.position);
-        }
-        else
-        {
-            navMeshAgent.SetDestination(transform.position); 
-            AttackEnemiesInRange();
+            float distance = Vector3.Distance(transform.position, target.position);
+            if (distance > unitStats.attackRange)
+            {
+                navMeshAgent.SetDestination(target.position);
+            }
+            else
+            {
+                navMeshAgent.SetDestination(transform.position);
+                AttackEnemiesInRange();
+            }
         }
     }
 
@@ -86,6 +98,13 @@ public class UnitMovement : MonoBehaviour
             navMeshAgent.SetDestination(closestTarget.position);
             AttackEnemiesInRange();
         }
+    }
+
+    private void UpdateAnimatorSpeed()
+    {
+        float targetSpeed = navMeshAgent.velocity.magnitude;
+        currentSpeed = Mathf.Lerp(currentSpeed, targetSpeed, Time.deltaTime * smoothing);
+        animator.SetFloat("Speed", currentSpeed);
     }
 
     private void AttackEnemiesInRange()
@@ -104,23 +123,26 @@ public class UnitMovement : MonoBehaviour
             Collider[] hitColliders = Physics.OverlapSphere(transform.position, unitStats.attackRange);
             foreach (var hitCollider in hitColliders)
             {
-                if (hitCollider.CompareTag(tag))
+                if (hitCollider.CompareTag(enemyTag))
                 {
-                    if (unitController.GetMana() == unitStats.maxMana)
-                    {
-                        transform.GetComponent<Attack>().Launch(hitCollider.transform, animator, true);
-                        hitCollider.GetComponent<UnitController>().TakeDamage(unitStats.specialAttackDamage);
-                        unitController.SetMana(0);
-                    }
-                    else
-                    {
-                        transform.GetComponent<Attack>().Launch(hitCollider.transform, animator, false);
-                        hitCollider.GetComponent<UnitController>().TakeDamage(unitStats.attackDamage);
-                        unitController.RegenerateMana();
-                    }
+                    PerformAttack(hitCollider);
                 }
             }
             yield return new WaitForSeconds(unitStats.attackSpeed);
+        }
+    }
+
+    private void PerformAttack(Collider targetCollider)
+    {
+        if (unitController.GetMana() == unitStats.maxMana)
+        {
+            GetComponent<Spell>().CastSpell(targetCollider.transform, animator);
+            targetCollider.GetComponent<UnitController>().TakeDamage(unitStats.specialAttackDamage);
+        }
+        else
+        {
+            GetComponent<Attack>().Launch(targetCollider.transform, animator);
+            targetCollider.GetComponent<UnitController>().TakeDamage(unitStats.attackDamage);
         }
     }
 
@@ -128,7 +150,7 @@ public class UnitMovement : MonoBehaviour
     {
         Transform closestTarget = null;
         float closestDistance = Mathf.Infinity;
-        foreach (GameObject potentialTarget in GameObject.FindGameObjectsWithTag(tag))
+        foreach (GameObject potentialTarget in GameObject.FindGameObjectsWithTag(enemyTag))
         {
             float distance = Vector3.Distance(transform.position, potentialTarget.transform.position);
             if (distance < closestDistance)

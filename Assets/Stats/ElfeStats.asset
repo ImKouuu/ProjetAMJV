@@ -9,10 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93f3996f378508c42a6b63c384a8ba6e, type: 3}
+  m_Script: {fileID: 11500000, guid: 7a1bed08bb8870646b3adb734194835c, type: 3}
   m_Name: ElfeStats
   m_EditorClassIdentifier: 
-  unitName: Elfe
-  health: 80
-  damage: 15
-  speed: 20
+  attackDamage: 10
+  attackSpeed: 1
+  speed: 10
+  maxMana: 90
+  maxHealth: 200
+  attackRange: 20
+  cost: 1
+  specialAttackDamage: 30
+  armor: 5
+  manaRegen: 30
