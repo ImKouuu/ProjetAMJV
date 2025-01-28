@@ -812,6 +812,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitStats: {fileID: 11400000, guid: e79e7f5082cb6ad4f8124a00ec286e6f, type: 2}
+  healthManaCanvasPrefab: {fileID: 2369611849813027291, guid: 8f16e9ac5ab119a489b2ce18d0f4fe61, type: 3}
+  barHeightOffset: 4
 --- !u!114 &3115433277279998461
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -826,8 +828,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitStats: {fileID: 11400000, guid: e79e7f5082cb6ad4f8124a00ec286e6f, type: 2}
   animator: {fileID: 4440732915068545424}
-  healAmount: 0
-  healRange: 0
+  enemyTag: 
+  healRange: 1000
 --- !u!114 &2896482187608345270
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -842,6 +844,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitStats: {fileID: 11400000, guid: e79e7f5082cb6ad4f8124a00ec286e6f, type: 2}
   animator: {fileID: 4440732915068545424}
+  unitController: {fileID: 6022008986013437530}
   arrowPrefab: {fileID: 8995756590131258555, guid: 071c6ab9bd720ed47916912fc129acb2, type: 3}
   speed: 15
 --- !u!195 &1653870574614391455

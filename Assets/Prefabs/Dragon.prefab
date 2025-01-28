@@ -1464,11 +1464,10 @@ GameObject:
   - component: {fileID: 4641751468709231659}
   - component: {fileID: 1005962147603678505}
   - component: {fileID: 3397555677153571341}
-  - component: {fileID: 7568648452675732934}
   - component: {fileID: 8349703816224616243}
   m_Layer: 7
   m_Name: Dragon
-  m_TagString: Enemy
+  m_TagString: Unit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1481,7 +1480,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7759099385942403010}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.0000027865171, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.0000007152558, y: 0, z: -1.6117322e-12}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 0
@@ -1597,6 +1596,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitStats: {fileID: 11400000, guid: 6f79b034e9f7bf64d8af664595e5401c, type: 2}
+  healthManaCanvasPrefab: {fileID: 2369611849813027291, guid: 8f16e9ac5ab119a489b2ce18d0f4fe61, type: 3}
+  barHeightOffset: 4
 --- !u!114 &3397555677153571341
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1612,22 +1613,6 @@ MonoBehaviour:
   unitStats: {fileID: 11400000, guid: 6f79b034e9f7bf64d8af664595e5401c, type: 2}
   animator: {fileID: 5650276265629042717}
   unitController: {fileID: 1005962147603678505}
---- !u!114 &7568648452675732934
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7759099385942403010}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11895c16a8fee9f43bc9c298509ccb18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  unitStats: {fileID: 11400000, guid: 6f79b034e9f7bf64d8af664595e5401c, type: 2}
-  animator: {fileID: 5650276265629042717}
-  fireballPrefab: {fileID: 6867118071280211636, guid: 3d126aac327f32745bcea8922f3d395c, type: 3}
-  speed: 10
 --- !u!195 &8349703816224616243
 NavMeshAgent:
   m_ObjectHideFlags: 0

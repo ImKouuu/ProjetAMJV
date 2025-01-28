@@ -6,7 +6,7 @@ public abstract class Spell : MonoBehaviour
     [SerializeField] public UnitStats unitStats;
     [SerializeField] public Animator animator;
 
-    private string enemyTag;
+    public string enemyTag;
     [NonSerialized] public UnitController unitController;
 
     public virtual void Start()

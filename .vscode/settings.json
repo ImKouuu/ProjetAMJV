@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Projet.sln"
+    "dotnet.defaultSolution": "ProjetAMJV.sln"
 }
