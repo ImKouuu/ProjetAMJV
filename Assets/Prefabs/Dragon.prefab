@@ -1626,6 +1626,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitStats: {fileID: 11400000, guid: 6f79b034e9f7bf64d8af664595e5401c, type: 2}
   animator: {fileID: 5650276265629042717}
+  unitController: {fileID: 1005962147603678505}
   fireballPrefab: {fileID: 6867118071280211636, guid: 3d126aac327f32745bcea8922f3d395c, type: 3}
   speed: 10
 --- !u!195 &8349703816224616243

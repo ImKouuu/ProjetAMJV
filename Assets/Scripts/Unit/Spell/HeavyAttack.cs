@@ -2,9 +2,13 @@ using UnityEngine;
 
 public class HeavyAttack : Spell
 {
-    [SerializeField] private float specialAttackDamage;
     [SerializeField] private float radius = 5f;
-    [SerializeField] private float force = 700f;
+    [SerializeField] private float force = 400f;
+
+    public override void Start()
+    {
+        base.Start();
+    }
 
     public override void CastSpell(Transform target, Animator animator)
     {
@@ -17,14 +21,9 @@ public class HeavyAttack : Spell
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, radius);
         foreach (var hitCollider in hitColliders)
         {
-            if (hitCollider.CompareTag("Enemy"))
+            if (hitCollider.tag == enemyTag)
             {
                 UnitController enemyController = hitCollider.GetComponent<UnitController>();
-                if (enemyController != null)
-                {
-                    enemyController.TakeDamage((int)specialAttackDamage);
-                }
-
                 Rigidbody rb = hitCollider.GetComponent<Rigidbody>();
                 if (rb != null)
                 {

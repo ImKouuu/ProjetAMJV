@@ -1,22 +1,30 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Heal : Spell
 {
-    [SerializeField] private int healAmount;
-    [SerializeField] private float healRange;
+    [SerializeField] private float healRange = 1000f;
 
+    public override void Start()
+    {
+        base.Start();
+        unitController = GetComponent<UnitController>();
+
+    }
     public override void CastSpell(Transform target, Animator animator)
     {
         UnitController nearestAlly = FindNearestAlly();
         if (nearestAlly != null)
         {
-            base.CastSpell(target, animator);
-            nearestAlly.Heal(healAmount);
-            Debug.Log($"{gameObject.name} a soigné {nearestAlly.name} pour {healAmount} points de vie.");
+            animator.Play("Spell");
+            unitController.SetMana(0);
+            nearestAlly.Heal(unitStats.specialAttackDamage);
         }
         else
         {
-            Debug.Log("Aucun allié à portée pour être soigné.");
+            animator.Play("Spell");
+            unitController.SetMana(0);
+            transform.GetComponent<UnitController>().Heal(unitStats.specialAttackDamage/2);
         }
     }
 

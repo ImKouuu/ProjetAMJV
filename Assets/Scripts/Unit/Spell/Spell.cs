@@ -6,11 +6,13 @@ public abstract class Spell : MonoBehaviour
     [SerializeField] public UnitStats unitStats;
     [SerializeField] public Animator animator;
 
-    private string enemyTag;
-    [NonSerialized] public UnitController unitController;
+    [NonSerialized] public string enemyTag;
+    public UnitController unitController;
 
     public virtual void Start()
     {
+        unitStats = GetComponent<UnitStats>();
+        animator = GetComponent<Animator>();
         enemyTag = CompareTag("Unit") ? "Enemy" : "Unit";
         unitController = GetComponent<UnitController>();
     }

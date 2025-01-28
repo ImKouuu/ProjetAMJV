@@ -15,15 +15,6 @@ public class Arrow : MonoBehaviour
     }
         private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Enemy"))
-        {
-            UnitController enemyController = collision.gameObject.GetComponent<UnitController>();
-            if (enemyController != null)
-            {
-                UnitStats unitStats = GetComponent<UnitStats>();
-                enemyController.TakeDamage(unitStats.specialAttackDamage);
-            }
-        }
         Destroy(gameObject);
     }
 }
