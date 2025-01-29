@@ -6,10 +6,12 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    public bool IsBattleActive { get; private set; } = false;
+    public bool IsBattleOver { get; private set; } = false;
+    public bool IsVictory { get; private set; } = false;
 
     [SerializeField] private GameObject blueGrass, blueSand, grass, sand;
     [SerializeField] private Tilemap arenaTilemap;
+    [SerializeField] private GameObject defeatPanel, victoryPanel;
 
     void Awake()
     {
@@ -22,12 +24,39 @@ public class GameManager : MonoBehaviour
         DisableAllUnits();
     }
 
+    void Update()
+    {
+        if (IsBattleOver)
+        {
+            Time.timeScale = 0;
+            EndBattle(IsVictory);
+        }
+    }
+
     public void StartBattle()
     {
-        IsBattleActive = true;
+        if (!HasCrownPosedUnit())
+        {
+            Debug.Log("Aucune unité avec 'CrownPosed' n'est présente. La partie ne peut pas être lancée.");
+            return;
+        }
+
         ReplaceBenchTilesWithGrass();
         EnableAllUnitsMovement();
         FindFirstObjectByType<ShopManager>()?.DisableShop();
+        FindFirstObjectByType<ModeManager>()?.OnBattleStart();
+    }
+
+    private bool HasCrownPosedUnit()
+    {
+        foreach (GameObject unit in GameObject.FindGameObjectsWithTag("Unit"))
+        {
+            if (unit.transform.Find("CrownPosed") != null)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     private void DisableAllUnits()
@@ -105,5 +134,37 @@ public class GameManager : MonoBehaviour
                 Instantiate(sand, position, Quaternion.identity, arenaTilemap.transform);
             }
         }
+    }
+
+    private void EndBattle(bool isVictory)
+    {
+        if (isVictory)
+        {
+            if (victoryPanel != null)
+            {
+                victoryPanel.SetActive(true);
+            }
+            else
+            {
+                Debug.LogError("Victory panel is not assigned in the inspector.");
+            }
+        }
+        else
+        {
+            if (defeatPanel != null)
+            {
+                defeatPanel.SetActive(true);
+            }
+            else
+            {
+                Debug.LogError("Defeat panel is not assigned in the inspector.");
+            }
+        }
+    }
+
+    public void SetBattleOver(bool isVictory)
+    {
+        IsBattleOver = true;
+        IsVictory = isVictory;
     }
 }

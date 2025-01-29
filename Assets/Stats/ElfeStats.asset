@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a1bed08bb8870646b3adb734194835c, type: 3}
   m_Name: ElfeStats
   m_EditorClassIdentifier: 
-  attackDamage: 10
-  attackSpeed: 1
-  speed: 10
-  maxMana: 90
-  maxHealth: 200
+  attackDamage: 5
+  attackSpeed: 3
+  speed: 20
+  maxMana: 150
+  maxHealth: 150
   attackRange: 20
-  cost: 1
+  cost: 5
   specialAttackDamage: 30
-  armor: 5
+  armor: 0
   manaRegen: 30

@@ -52,6 +52,11 @@ public class RulesManager : MonoBehaviour
         {
             MoneyManager.Instance.UnlimitedMoney();
         }
+        else
+        {
+            MoneyManager.Instance.ResetMoney();
+            MoneyManager.Instance.AddMoney(20);
+        }
         StartCoroutine(LoadSceneCoroutine(arenaIndex));
     }
 

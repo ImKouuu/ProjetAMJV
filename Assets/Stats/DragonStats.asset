@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a1bed08bb8870646b3adb734194835c, type: 3}
   m_Name: DragonStats
   m_EditorClassIdentifier: 
-  attackDamage: 10
-  attackSpeed: 1
-  speed: 10
-  maxMana: 90
+  attackDamage: 20
+  attackSpeed: 5
+  speed: 15
+  maxMana: 150
   maxHealth: 200
   attackRange: 20
-  cost: 1
-  specialAttackDamage: 20
-  armor: 5
+  cost: 50
+  specialAttackDamage: 200
+  armor: 20
   manaRegen: 30

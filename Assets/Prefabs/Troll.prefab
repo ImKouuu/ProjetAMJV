@@ -932,6 +932,7 @@ GameObject:
   - component: {fileID: 450026645495755082}
   - component: {fileID: 5533230236253219934}
   - component: {fileID: 2570792692391448694}
+  - component: {fileID: 4817871607887086448}
   m_Layer: 7
   m_Name: Troll
   m_TagString: Unit
@@ -1002,7 +1003,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!136 &1610472276130783676
 CapsuleCollider:
@@ -1113,6 +1114,18 @@ NavMeshAgent:
   m_BaseOffset: 5.3
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &4817871607887086448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7531527203773230815}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee432e1fc6a23bb48803ab8288299e6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8038563301595775595
 GameObject:
   m_ObjectHideFlags: 0

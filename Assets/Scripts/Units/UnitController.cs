@@ -6,17 +6,16 @@ public class UnitController : MonoBehaviour
     [SerializeField] private UnitStats unitStats;
     [SerializeField] private GameObject healthManaCanvasPrefab;
     [SerializeField] private float barHeightOffset = 2f;
-    private int health;
-    private int mana;
+    private int health, mana, cost;
     private bool barsVisible = false;
     private Canvas healthManaCanvas;
-    private Image healthBar;
-    private Image manaBar;
+    private Image healthBar, manaBar;
 
     private void Start()
     {
         health = unitStats.maxHealth;
         mana = 0;
+        cost = unitStats.cost;
 
         CreateBars();
 
@@ -27,7 +26,7 @@ public class UnitController : MonoBehaviour
 
     private void Update()
     {
-        if (health <= 0)
+        if (health <= 0 || transform.position.y < -10)
         {
             Death();
         }
@@ -35,7 +34,7 @@ public class UnitController : MonoBehaviour
 
     public int GetHealth() => health;
     public int GetMana() => mana;
-
+    public int GetCost() => cost;
     public void SetHealth(int value)
     {
         health = Mathf.Clamp(value, 0, unitStats.maxHealth);
@@ -53,7 +52,21 @@ public class UnitController : MonoBehaviour
     public void Heal(int amount) => SetHealth(health + amount);
     public void UseMana(int amount) => SetMana(mana - amount);
 
-    private void Death() => Destroy(gameObject);
+    private void Death()
+    {
+        if(gameObject.GetComponent<Crown>().enabled == true) 
+        {
+            if (gameObject.CompareTag("Unit"))
+            {
+                GameManager.Instance.SetBattleOver(isVictory: false);
+            }
+            else
+            {
+                GameManager.Instance.SetBattleOver(isVictory: true);
+            }
+        }
+        Destroy(gameObject);
+    }
 
     private void CreateBars()
     {
@@ -93,4 +106,5 @@ public class UnitController : MonoBehaviour
         healthManaCanvas.gameObject.SetActive(visible);
         barsVisible = visible;
     }
+
 }

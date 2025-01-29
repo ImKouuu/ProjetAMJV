@@ -670,6 +670,7 @@ GameObject:
   - component: {fileID: 7556318390379992167}
   - component: {fileID: 7750404483832068012}
   - component: {fileID: 7365767034100594099}
+  - component: {fileID: 173733656700962756}
   m_Layer: 7
   m_Name: Nain
   m_TagString: Unit
@@ -752,7 +753,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!136 &7758361888610479957
 CapsuleCollider:
@@ -846,6 +847,18 @@ NavMeshAgent:
   m_BaseOffset: 1.4
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &173733656700962756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4742925350070959565}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee432e1fc6a23bb48803ab8288299e6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5992049598185083896
 GameObject:
   m_ObjectHideFlags: 0

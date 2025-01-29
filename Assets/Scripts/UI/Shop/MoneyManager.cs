@@ -52,4 +52,10 @@ public class MoneyManager : MonoBehaviour
         money = int.MaxValue;
         unlimitedMoney = true;
     }
+
+    public void ResetMoney()
+    {
+        money = 0;
+        unlimitedMoney = false;
+    }
 }

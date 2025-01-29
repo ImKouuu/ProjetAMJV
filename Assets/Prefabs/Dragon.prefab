@@ -1465,6 +1465,7 @@ GameObject:
   - component: {fileID: 1005962147603678505}
   - component: {fileID: 3397555677153571341}
   - component: {fileID: 8349703816224616243}
+  - component: {fileID: 2531432395676317358}
   m_Layer: 7
   m_Name: Dragon
   m_TagString: Unit
@@ -1564,7 +1565,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!114 &4641751468709231659
 MonoBehaviour:
@@ -1635,6 +1636,18 @@ NavMeshAgent:
   m_BaseOffset: 6
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &2531432395676317358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7759099385942403010}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee432e1fc6a23bb48803ab8288299e6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7935074232557785907
 GameObject:
   m_ObjectHideFlags: 0

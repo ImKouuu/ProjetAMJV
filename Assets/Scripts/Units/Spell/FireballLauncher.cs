@@ -5,6 +5,12 @@ public class FireballLauncher : Spell
     [SerializeField] private GameObject fireballPrefab;
     [SerializeField] private float speed = 10f;
 
+    public override void Start()
+    {
+        base.Start();
+        unitController = GetComponent<UnitController>();
+
+    }
     public override void CastSpell(Transform target, Animator animator)
     {
         base.CastSpell(target, animator);
