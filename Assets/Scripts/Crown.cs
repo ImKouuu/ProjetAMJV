@@ -2,10 +2,20 @@ using UnityEngine;
 
 public class Crown : MonoBehaviour
 {
-    private void OnTriggerEnter(Collider other)
-    {
-        UnitController unitController = other.GetComponent<UnitController>();
+    private UnitController unitController;
 
+    private void Start()
+    {
+        unitController = GetComponent<UnitController>();
+        if (unitController == null)
+        {
+            Debug.LogError("UnitController is missing on " + gameObject.name);
+            enabled = false;
+        }
+    }
+
+    private void Update()
+    {
         if (unitController != null)
         {
             UpdateTargetsBasedOnCrown(unitController);
@@ -15,19 +25,20 @@ public class Crown : MonoBehaviour
     private void UpdateTargetsBasedOnCrown(UnitController unitController)
     {
         string crownTag = unitController.CompareTag("Unit") ? "Unit" : "Enemy";
+        string oppositeTag = crownTag == "Unit" ? "Enemy" : "Unit";
 
         foreach (UnitMovement unit in FindObjectsByType<UnitMovement>(FindObjectsSortMode.None))
         {
             if (unit.CompareTag(crownTag))
             {
-                if (unit.GetCurrentMode() == UnitMovement.MovementMode.Offensive)
+                if (unit.GetCurrentMode() == UnitMovement.MovementMode.Defensive)
                 {
                     unit.SetTarget(transform);
                 }
             }
-            else
+            else if (unit.CompareTag(oppositeTag))
             {
-                if (unit.GetCurrentMode() == UnitMovement.MovementMode.Defensive)
+                if (unit.GetCurrentMode() == UnitMovement.MovementMode.Offensive)
                 {
                     unit.SetTarget(transform);
                 }

@@ -10,6 +10,7 @@ public class ModeManager : MonoBehaviour
     [SerializeField] private Camera cam;
     private List<UnitMovement.MovementMode> modes = new List<UnitMovement.MovementMode> { UnitMovement.MovementMode.Offensive, UnitMovement.MovementMode.Defensive, UnitMovement.MovementMode.Neutral };
     private bool battleStarted = false;
+    private List<GameObject> unitsAndEnemies;
 
     void Start()
     {
@@ -18,36 +19,72 @@ public class ModeManager : MonoBehaviour
 
     void Update()
     {
+        UpdateList();
         if (Input.GetKeyDown(KeyCode.M))
         {
             ChangeMode();
         }
-        if(!battleStarted)
+        if (!battleStarted)
         {
             CreateModeTexts();
+        }
+        checkIfCrowned();
+    }
+
+    private void UpdateList()
+    {
+        unitsAndEnemies = new List<GameObject>();
+        unitsAndEnemies.AddRange(GameObject.FindGameObjectsWithTag("Unit"));
+        unitsAndEnemies.AddRange(GameObject.FindGameObjectsWithTag("Enemy"));
+    }
+
+    private void checkIfCrowned()
+    {
+        foreach (GameObject unit in unitsAndEnemies)
+        {
+            Crown crown = unit.GetComponent<Crown>();
+            if (crown != null && crown.enabled)
+            {
+                Canvas modeCanvas = unit.GetComponentInChildren<Canvas>();
+                if (modeCanvas != null && modeCanvas.gameObject.name == "ModeCanvas")
+                {
+                    modeCanvas.gameObject.SetActive(false);
+                }
+                UnitMovement unitMovement = unit.GetComponent<UnitMovement>();
+                if (unitMovement != null)
+                {
+                    unitMovement.SetMovementMode(UnitMovement.MovementMode.Neutral);
+                }
+            }
         }
     }
 
     public void CreateModeTexts()
     {
-        foreach (GameObject unit in GameObject.FindGameObjectsWithTag("Unit"))
+        foreach (GameObject unit in unitsAndEnemies)
         {
-            // Supprimer les canvases existants
+            // Vérifiez si le canvas existe déjà
+            Canvas modeCanvas = null;
             Canvas[] existingCanvases = unit.GetComponentsInChildren<Canvas>();
             foreach (Canvas existingCanvas in existingCanvases)
             {
                 if (existingCanvas.gameObject.name == "ModeCanvas")
                 {
-                    Destroy(existingCanvas.gameObject);
+                    modeCanvas = existingCanvas;
+                    break;
                 }
             }
 
-            GameObject canvasObject = Instantiate(modeCanvasPrefab, unit.transform);
-            canvasObject.name = "ModeCanvas";
-            Canvas modeCanvas = canvasObject.GetComponent<Canvas>();
+            // Si le canvas n'existe pas, créez-le
+            if (modeCanvas == null)
+            {
+                GameObject canvasObject = Instantiate(modeCanvasPrefab, unit.transform);
+                canvasObject.name = "ModeCanvas";
+                modeCanvas = canvasObject.GetComponent<Canvas>();
+                modeCanvas.transform.localPosition = new Vector3(0, modeHeightOffset, 0);
+            }
 
-            modeCanvas.transform.localPosition = new Vector3(0, modeHeightOffset, 0);
-
+            // Mettez à jour le texte du mode
             TMP_Text modeText = modeCanvas.transform.GetComponentInChildren<TMP_Text>();
             modeText.fontSize = fontSize; // Appliquer la taille du texte
             UnitMovement unitMovement = unit.GetComponent<UnitMovement>();
@@ -83,7 +120,7 @@ public class ModeManager : MonoBehaviour
     public void OnBattleStart()
     {
         battleStarted = true;
-        foreach (GameObject unit in GameObject.FindGameObjectsWithTag("Unit"))
+        foreach (GameObject unit in unitsAndEnemies)
         {
             Canvas modeCanvas = unit.GetComponentInChildren<Canvas>();
             if (modeCanvas != null && modeCanvas.gameObject.name == "ModeCanvas")
@@ -95,7 +132,7 @@ public class ModeManager : MonoBehaviour
 
     void LateUpdate()
     {
-        foreach (GameObject unit in GameObject.FindGameObjectsWithTag("Unit"))
+        foreach (GameObject unit in unitsAndEnemies)
         {
             Canvas modeCanvas = unit.GetComponentInChildren<Canvas>();
             if (modeCanvas != null && modeCanvas.gameObject.name == "ModeCanvas")

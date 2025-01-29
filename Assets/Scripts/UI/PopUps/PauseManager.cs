@@ -72,6 +72,7 @@ public class PauseManager : MonoBehaviour
 
     private void BackToMenuButton()
     {
+        Time.timeScale = 1;
         UnityEngine.SceneManagement.SceneManager.LoadScene(0);
     }
 }

@@ -71,12 +71,6 @@ public class GameManager : MonoBehaviour
 
     public void DisableUnit(GameObject unit)
     {
-        NavMeshAgent agent = unit.GetComponent<NavMeshAgent>();
-        if (agent != null)
-        {
-            agent.enabled = false;
-        }
-
         UnitMovement unitMovement = unit.GetComponent<UnitMovement>();
         if (unitMovement != null)
         {
