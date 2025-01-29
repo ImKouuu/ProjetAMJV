@@ -933,6 +933,7 @@ GameObject:
   - component: {fileID: 5533230236253219934}
   - component: {fileID: 2570792692391448694}
   - component: {fileID: 4817871607887086448}
+  - component: {fileID: 8105436084514480676}
   m_Layer: 7
   m_Name: Troll
   m_TagString: Unit
@@ -1074,7 +1075,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitStats: {fileID: 11400000, guid: d79c226bc0c622c4a92325257a409792, type: 2}
   animator: {fileID: 3263390194896633089}
-  enemyTag: 
+  unitController: {fileID: 0}
   radius: 5
   force: 400
 --- !u!114 &5533230236253219934
@@ -1091,6 +1092,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitStats: {fileID: 11400000, guid: d79c226bc0c622c4a92325257a409792, type: 2}
   animator: {fileID: 3263390194896633089}
+  enemyTag: 
   unitController: {fileID: 1625071185564582716}
 --- !u!195 &2570792692391448694
 NavMeshAgent:
@@ -1126,6 +1128,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee432e1fc6a23bb48803ab8288299e6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8105436084514480676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7531527203773230815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95f20641c4b55ff4b84bd578796ec2ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unitStats: {fileID: 11400000, guid: d79c226bc0c622c4a92325257a409792, type: 2}
+  animator: {fileID: 3263390194896633089}
+  unitController: {fileID: 1625071185564582716}
+  radius: 5
+  force: 10
 --- !u!1 &8038563301595775595
 GameObject:
   m_ObjectHideFlags: 0

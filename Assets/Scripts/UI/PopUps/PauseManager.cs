@@ -6,30 +6,50 @@ public class PauseManager : MonoBehaviour
     [SerializeField] private GameObject pausePanel;
     [SerializeField] private Button continueButton, backToMenuButton;
     private bool isPaused = false;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
 
     private bool isEscapePressed()
     {
         return Input.GetKeyDown(KeyCode.Escape);
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (isEscapePressed())
         {
-            isPaused = !isPaused;
+            TogglePause();
         }
+    }
+
+    private void TogglePause()
+    {
+        isPaused = !isPaused;
+
         if (isPaused)
         {
-            Time.timeScale = 0;
-            pausePanel.SetActive(true);
+            PauseGame();
         }
         else
         {
-            Time.timeScale = 1;
-            pausePanel.SetActive(false);
+            ResumeGame();
         }
+    }
+
+    private void PauseGame()
+    {
+        if (Time.timeScale != 0)
+        {
+            Time.timeScale = 0;
+        }
+        pausePanel.SetActive(true);
+    }
+
+    private void ResumeGame()
+    {
+        if (Time.timeScale == 0)
+        {
+            Time.timeScale = 1;
+        }
+        pausePanel.SetActive(false);
     }
 
     private void OnEnable()
@@ -47,6 +67,7 @@ public class PauseManager : MonoBehaviour
     private void ContinueButton()
     {
         isPaused = false;
+        ResumeGame();
     }
 
     private void BackToMenuButton()

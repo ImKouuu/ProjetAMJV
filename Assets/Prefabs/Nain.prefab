@@ -671,6 +671,7 @@ GameObject:
   - component: {fileID: 7750404483832068012}
   - component: {fileID: 7365767034100594099}
   - component: {fileID: 173733656700962756}
+  - component: {fileID: 3013708556117660090}
   m_Layer: 7
   m_Name: Nain
   m_TagString: Unit
@@ -824,6 +825,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitStats: {fileID: 11400000, guid: 2107563ab8755094ea8a95d8a537d5c0, type: 2}
   animator: {fileID: 9018834439507522687}
+  enemyTag: 
   unitController: {fileID: 7556318390379992167}
 --- !u!195 &7365767034100594099
 NavMeshAgent:
@@ -859,6 +861,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee432e1fc6a23bb48803ab8288299e6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3013708556117660090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4742925350070959565}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce9da05441407c54a8b66bd3f39e7df6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unitStats: {fileID: 11400000, guid: 2107563ab8755094ea8a95d8a537d5c0, type: 2}
+  animator: {fileID: 9018834439507522687}
+  unitController: {fileID: 7556318390379992167}
 --- !u!1 &5992049598185083896
 GameObject:
   m_ObjectHideFlags: 0

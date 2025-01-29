@@ -889,6 +889,7 @@ GameObject:
   - component: {fileID: 3863569867520463345}
   - component: {fileID: 5790830604518484746}
   - component: {fileID: 2046130863165043596}
+  - component: {fileID: 7214811310364448963}
   m_Layer: 7
   m_Name: Humain
   m_TagString: Unit
@@ -960,6 +961,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitStats: {fileID: 11400000, guid: fd1728eaeb3d687418c107a6069fc42d, type: 2}
   animator: {fileID: 1494621142162515988}
+  enemyTag: 
   unitController: {fileID: 4609424757695589119}
 --- !u!114 &4609424757695589119
 MonoBehaviour:
@@ -1077,6 +1079,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee432e1fc6a23bb48803ab8288299e6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7214811310364448963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5913587467163417545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce9da05441407c54a8b66bd3f39e7df6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unitStats: {fileID: 11400000, guid: fd1728eaeb3d687418c107a6069fc42d, type: 2}
+  animator: {fileID: 1494621142162515988}
+  unitController: {fileID: 4609424757695589119}
 --- !u!1 &7749849226155250631
 GameObject:
   m_ObjectHideFlags: 0

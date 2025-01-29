@@ -1466,6 +1466,7 @@ GameObject:
   - component: {fileID: 3397555677153571341}
   - component: {fileID: 8349703816224616243}
   - component: {fileID: 2531432395676317358}
+  - component: {fileID: 3717671555871461079}
   m_Layer: 7
   m_Name: Dragon
   m_TagString: Unit
@@ -1613,6 +1614,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitStats: {fileID: 11400000, guid: 6f79b034e9f7bf64d8af664595e5401c, type: 2}
   animator: {fileID: 5650276265629042717}
+  enemyTag: 
   unitController: {fileID: 1005962147603678505}
 --- !u!195 &8349703816224616243
 NavMeshAgent:
@@ -1648,6 +1650,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee432e1fc6a23bb48803ab8288299e6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3717671555871461079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7759099385942403010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47a88d99828cd3343a0c9e4bcfba1aff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unitStats: {fileID: 11400000, guid: 6f79b034e9f7bf64d8af664595e5401c, type: 2}
+  animator: {fileID: 5650276265629042717}
+  unitController: {fileID: 1005962147603678505}
+  fireballPrefab: {fileID: 6867118071280211636, guid: 3d126aac327f32745bcea8922f3d395c, type: 3}
+  speed: 10
 --- !u!1 &7935074232557785907
 GameObject:
   m_ObjectHideFlags: 0

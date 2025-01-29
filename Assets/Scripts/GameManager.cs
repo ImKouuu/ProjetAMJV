@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         DisableAllUnits();
+        MoneyManager.Instance.SaveMoneyBeforeShop();
     }
 
     void Update()
@@ -40,6 +41,7 @@ public class GameManager : MonoBehaviour
             Debug.Log("Aucune unité avec 'CrownPosed' n'est présente. La partie ne peut pas être lancée.");
             return;
         }
+        MoneyManager.Instance.SaveMoney(); // Sauvegarder l'argent avant de commencer la bataille
 
         ReplaceBenchTilesWithGrass();
         EnableAllUnitsMovement();
@@ -160,6 +162,7 @@ public class GameManager : MonoBehaviour
                 Debug.LogError("Defeat panel is not assigned in the inspector.");
             }
         }
+        IsBattleOver = false;
     }
 
     public void SetBattleOver(bool isVictory)

@@ -8,8 +8,6 @@ public class DefeatManager : MonoBehaviour
     [SerializeField] private GameObject defeatPanel;
     [SerializeField] private Button backToMenuButton, restartButton;
     [SerializeField] private TMP_Text damageStatsText;
-    
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
 
     private void OnEnable()
     {
@@ -17,7 +15,6 @@ public class DefeatManager : MonoBehaviour
         restartButton.onClick.AddListener(RestartButton);
     }
 
-    // Update is called once per frame
     private void OnDisable()
     {
         backToMenuButton.onClick.RemoveListener(BackToMenuButton);
@@ -30,12 +27,12 @@ public class DefeatManager : MonoBehaviour
         DamageStatsManager.Instance.ResetDamageStats();
         SceneManager.LoadScene(0);
         DamageStatsManager.Instance.SetDamageStatsText(damageStatsText);
-
     }
 
     private void RestartButton()
     {
         Time.timeScale = 1;
+        MoneyManager.Instance.TurnMoneyBeforeShopIntoMainMoney();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

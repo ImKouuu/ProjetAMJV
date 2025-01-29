@@ -674,6 +674,7 @@ GameObject:
   - component: {fileID: 2896482187608345270}
   - component: {fileID: 1653870574614391455}
   - component: {fileID: 3362018952144055294}
+  - component: {fileID: 7988109562980547021}
   m_Layer: 7
   m_Name: Elfe
   m_TagString: Unit
@@ -795,7 +796,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1693505a825f3af42b56f78ece7f0835, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentMode: 0
+  currentMode: 2
   target: {fileID: 0}
   navMeshAgent: {fileID: 1653870574614391455}
   unitStats: {fileID: 11400000, guid: e79e7f5082cb6ad4f8124a00ec286e6f, type: 2}
@@ -829,7 +830,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitStats: {fileID: 11400000, guid: e79e7f5082cb6ad4f8124a00ec286e6f, type: 2}
   animator: {fileID: 4440732915068545424}
-  enemyTag: 
+  unitController: {fileID: 0}
   healRange: 1000
 --- !u!114 &2896482187608345270
 MonoBehaviour:
@@ -845,6 +846,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitStats: {fileID: 11400000, guid: e79e7f5082cb6ad4f8124a00ec286e6f, type: 2}
   animator: {fileID: 4440732915068545424}
+  enemyTag: 
   unitController: {fileID: 6022008986013437530}
   arrowPrefab: {fileID: 8995756590131258555, guid: 071c6ab9bd720ed47916912fc129acb2, type: 3}
   speed: 15
@@ -882,6 +884,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee432e1fc6a23bb48803ab8288299e6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7988109562980547021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1802390789506737934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb4cd0ed49f43374ab29cc211e0ec04c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unitStats: {fileID: 11400000, guid: e79e7f5082cb6ad4f8124a00ec286e6f, type: 2}
+  animator: {fileID: 4440732915068545424}
+  unitController: {fileID: 6022008986013437530}
+  healRange: 10
 --- !u!1 &2302059533429690066
 GameObject:
   m_ObjectHideFlags: 0

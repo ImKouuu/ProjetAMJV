@@ -10,15 +10,13 @@ public class VictoryManager : MonoBehaviour
     [SerializeField] private Button backToMenuButton, nextArenaButton;
     [SerializeField] private TMP_Text victoryText, damageStatsText;
     [SerializeField] private List<int> moneyRewards = new List<int> { 100, 200, 300, 400 };
-    
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
     private void OnEnable()
     {
         backToMenuButton.onClick.AddListener(BackToMenuButton);
         nextArenaButton.onClick.AddListener(NextArenaButton);
     }
 
-    // Update is called once per frame
     private void OnDisable()
     {
         backToMenuButton.onClick.RemoveListener(BackToMenuButton);
@@ -28,7 +26,9 @@ public class VictoryManager : MonoBehaviour
     private void BackToMenuButton()
     {
         Time.timeScale = 1;
+        DamageStatsManager.Instance.ResetDamageStats();
         SceneManager.LoadScene(0);
+        DamageStatsManager.Instance.SetDamageStatsText(damageStatsText);
     }
 
     private void NextArenaButton()
@@ -42,7 +42,8 @@ public class VictoryManager : MonoBehaviour
             Time.timeScale = 1;
             DamageStatsManager.Instance.ResetDamageStats();
             DamageStatsManager.Instance.SetDamageStatsText(damageStatsText);
-            MoneyManager.Instance.AddMoney(moneyRewards[currentSceneIndex]);
+            MoneyManager.Instance.TurnSavedMoneyIntoMainMoney();
+            MoneyManager.Instance.AddMoney(moneyRewards[currentSceneIndex]); // Ajouter l'argent gagné
             SceneManager.LoadScene(nextSceneIndex);
         }
         else

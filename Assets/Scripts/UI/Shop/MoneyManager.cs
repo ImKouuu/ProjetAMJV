@@ -6,6 +6,9 @@ public class MoneyManager : MonoBehaviour
 
     [SerializeField] private int money = 0;
     private bool unlimitedMoney = false;
+    private int savedMoney = 0; // Variable pour stocker l'argent
+
+    private int moneyBeforeShop = 0;
 
     void Awake()
     {
@@ -28,6 +31,7 @@ public class MoneyManager : MonoBehaviour
     public void AddMoney(int amount)
     {
         money += amount;
+        SaveMoney(); // Sauvegarder l'argent après chaque modification
     }
 
     public void SpendMoney(int amount)
@@ -35,6 +39,7 @@ public class MoneyManager : MonoBehaviour
         if (money >= amount)
         {
             money -= amount;
+            SaveMoney(); // Sauvegarder l'argent après chaque modification
         }
         else
         {
@@ -57,5 +62,25 @@ public class MoneyManager : MonoBehaviour
     {
         money = 0;
         unlimitedMoney = false;
+    }
+
+    public void SaveMoney()
+    {
+        savedMoney = money;
+    }
+
+    public void TurnSavedMoneyIntoMainMoney()
+    {
+        money = savedMoney;
+    }
+
+    public void SaveMoneyBeforeShop()
+    {
+        moneyBeforeShop = money;
+    }
+
+    public void TurnMoneyBeforeShopIntoMainMoney()
+    {
+        money = moneyBeforeShop;
     }
 }
